@@ -1,17 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from tortoise import Tortoise
-
-from src.database.register import register_tortoise
-from src.database.config import TORTOISE_ORM
-
-# enable schemas to read relationship between models
-Tortoise.init_models(["src.database.models"], "models")
-
-from src.routes import users, notes
-
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = FastAPI()
 
 app.add_middleware(
@@ -21,11 +14,8 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
-app.include_router(users.router)
-app.include_router(notes.router)
 
-register_tortoise(app, config=TORTOISE_ORM, generate_schemas=False)
-api_key = "on4ayqQH6Wn1sT8yPwtsydDWRZDxFSqJ"
+polygon_api_key = os.getenv('POLYGON_API_KEY')
 
 @app.get("/")
 def home():
@@ -37,9 +27,7 @@ def home():
   
 @app.get("/api/symbol_search")
 def symbol_search(keywords: str):
-  
-  # url = f"https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={keywords}&apikey={api_key}"
-  url = f"https://api.polygon.io/v3/reference/tickers?search={keywords}&active=true&limit=10&apiKey={api_key}"
+  url = f"https://api.polygon.io/v3/reference/tickers?search={keywords}&active=true&limit=10&apiKey={polygon_api_key}"
   response = requests.get(url)
   if response.status_code != 200:
     raise HTTPException(status_code=response.status_code, detail="Error fetching data")
@@ -50,7 +38,7 @@ def ticker_open_close(ticker: str):
   if not ticker:
       raise HTTPException(status_code=400, detail="Ticker symbol is required")
   
-  url = f"https://api.polygon.io/v1/open-close/{ticker}/previous?adjusted=true&apiKey={api_key}"
+  url = f"https://api.polygon.io/v1/open-close/{ticker}/previous?adjusted=true&apiKey={polygon_api_key}"
   
   try:
       response = requests.get(url)
