@@ -9,7 +9,7 @@ const pinia = createPinia()
 const app = createApp(App)
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/';
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://3.22.166.72:5001/';
 
 app.use(pinia)
 app.use(router)
