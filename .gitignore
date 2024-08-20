@@ -1,1 +1,9 @@
 archive
+services/backend/.env
+services/frontend/.env
+services/frontend/.vscode
+services/frontend/node_modules
+.DS_Store
+services/backend/.DS_Store
+services/frontend/.DS_Store
+services/backend/src/__pycache__
