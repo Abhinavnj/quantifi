@@ -25,6 +25,7 @@ app.include_router(users.router)
 app.include_router(notes.router)
 
 register_tortoise(app, config=TORTOISE_ORM, generate_schemas=False)
+api_key = "on4ayqQH6Wn1sT8yPwtsydDWRZDxFSqJ"
 
 @app.get("/")
 def home():
@@ -36,7 +37,7 @@ def home():
   
 @app.get("/api/symbol_search")
 def symbol_search(keywords: str):
-  api_key = "on4ayqQH6Wn1sT8yPwtsydDWRZDxFSqJ"
+  
   # url = f"https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={keywords}&apikey={api_key}"
   url = f"https://api.polygon.io/v3/reference/tickers?search={keywords}&active=true&limit=10&apiKey={api_key}"
   response = requests.get(url)
@@ -44,6 +45,20 @@ def symbol_search(keywords: str):
     raise HTTPException(status_code=response.status_code, detail="Error fetching data")
   return response.json()
 
-# @app.get("/stock/metrics")
-# def home():
-#     return "Hello, World!"
+@app.get("/api/ticker/open_close")
+def ticker_open_close(ticker: str):
+  if not ticker:
+      raise HTTPException(status_code=400, detail="Ticker symbol is required")
+  
+  url = f"https://api.polygon.io/v1/open-close/{ticker}/previous?adjusted=true&apiKey={api_key}"
+  
+  try:
+      response = requests.get(url)
+      response.raise_for_status()
+      data = response.json()
+      return {
+          "open": data.get("open"),
+          "close": data.get("close"),
+      }
+  except requests.exceptions.RequestException as e:
+      raise HTTPException(status_code=500, detail=str(e))

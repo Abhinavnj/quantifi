@@ -1,41 +1,67 @@
 <template>
-	<div class="relative">
+	<div class="relative w-full max-w-md flex items-center">
+		<!-- Search Icon -->
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="absolute left-3 h-5 w-5 text-gray-400 opacity-70"
+			fill="none"
+			viewBox="0 0 16 16"
+			stroke="currentColor"
+		>
+			<path
+				fill-rule="evenodd"
+				d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+				clip-rule="evenodd"
+			/>
+		</svg>
+		<!-- Search Input -->
 		<input
-			v-model="query"
-			@input="fetchSymbols"
 			type="text"
-			placeholder="Search"
-			class="input input-bordered w-full"
+			placeholder="Enter a symbol (ex. AAPL, IBM, VOO)"
+			class="input input-bordered w-full pl-10 pr-20 text-gray-300 bg-gray-800 rounded-lg"
+			ref="searchInput"
+			@input="fetchSymbols"
+			v-model="query"
 		/>
+		<!-- Command + K Shortcut -->
+		<div class="absolute right-3 flex items-center space-x-1 text-gray-500">
+			<kbd class="px-2 py-1 bg-gray-700 rounded text-xs">⌘</kbd>
+			<kbd class="px-2 py-1 bg-gray-700 rounded text-xs">K</kbd>
+		</div>
+		<!-- Dropdown List -->
 		<ul
 			v-if="symbols.length && query"
-			class="absolute w-full bg-white border mt-1 rounded-lg z-10"
+			class="absolute top-full mt-2 w-full bg-gray-800 border border-gray-600 rounded-lg z-10 shadow-lg"
 		>
 			<li
 				v-for="(symbol, index) in symbols"
 				:key="index"
 				@click="selectSymbol(symbol)"
-				class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+				class="px-4 py-2 cursor-pointer hover:bg-gray-700 text-gray-300 flex items-center space-x-2"
 			>
-				<span>{{ symbol.ticker }} - {{ symbol.name }}</span>
+				<span class="font-medium">{{ symbol.ticker }}</span>
+				<span class="text-sm text-gray-400">- {{ symbol.name }}</span>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, defineExpose } from "vue";
 import axios from "axios";
+
+// Reference to the search input
+const searchInput = ref<HTMLInputElement | null>(null);
+
+// Expose the searchInput ref to the parent component
+defineExpose({ searchInput });
 
 // Define the emit function
 const emit = defineEmits(["symbolSelected"]);
 
 // Define reactive state variables
 const query = ref("");
-const symbols = ref([]);
-
-// Your Polygon.io API key
-// const apiKey = "YOUR_API_KEY"; // Replace with your actual API key
+const symbols = ref<SymbolObject[]>([]);
 
 // Fetch symbols matching the user query
 const fetchSymbols = async () => {
@@ -44,13 +70,11 @@ const fetchSymbols = async () => {
 		return;
 	}
 
-	// const url = `https://api.polygon.io/v3/reference/tickers?search=${query.value}&active=true&limit=10&apiKey=${apiKey}`;
 	const url = `http://localhost:5001/api/symbol_search?keywords=${query.value}`;
 
 	try {
 		const response = await axios.get(url);
 		symbols.value = response.data.results || [];
-		console.log(symbols.value);
 	} catch (error) {
 		console.error("Error fetching symbols:", error);
 		symbols.value = [];

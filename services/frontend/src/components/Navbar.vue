@@ -1,57 +1,45 @@
 <template>
-	<div class="navbar bg-base-100">
-		<div class="navbar-start">
-			<div class="dropdown">
-				<div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-5 w-5"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h8m-8 6h16"
-						/>
-					</svg>
+	<nav class="relative z-10 bg-gray-900 shadow-lg">
+		<div class="container mx-auto px-4 py-3">
+			<div class="navbar bg-transparent">
+				<div class="navbar-start">
+					<!-- Use router-link for the brand name to link to the Home page -->
+					<img
+						src="../assets/favicon-1x1.png"
+						alt="Quantifi Logo"
+						class="h-8 w-8 mr-2"
+					/>
+					<router-link to="/" class="text-2xl font-bold text-white">
+						Quantifi
+					</router-link>
 				</div>
-				<ul
-					tabindex="0"
-					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-				>
-					<li><a>Item 1</a></li>
-					<li>
-						<a>Parent</a>
-						<ul class="p-2">
-							<li><a>Submenu 1</a></li>
-							<li><a>Submenu 2</a></li>
-						</ul>
-					</li>
-					<li><a>Item 3</a></li>
-				</ul>
+				<div class="navbar-end">
+					<ul class="menu menu-horizontal p-0">
+						<li>
+							<!-- Use router-link for navigation to the Home page -->
+							<router-link
+								to="/"
+								class="text-base font-medium text-white hover:text-primary"
+							>
+								Home
+							</router-link>
+						</li>
+						<li>
+							<!-- Use router-link for navigation to the Contact page -->
+							<router-link
+								to="/contact"
+								class="text-base font-medium text-white hover:text-primary"
+							>
+								Contact
+							</router-link>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<a class="btn btn-ghost text-xl">Quantifi</a>
 		</div>
-		<div class="navbar-center hidden lg:flex">
-			<ul class="menu menu-horizontal px-1">
-				<li><a>Item 1</a></li>
-				<li>
-					<details>
-						<summary>Parent</summary>
-						<ul class="p-2">
-							<li><a>Submenu 1</a></li>
-							<li><a>Submenu 2</a></li>
-						</ul>
-					</details>
-				</li>
-				<li><a>Item 3</a></li>
-			</ul>
-		</div>
-		<div class="navbar-end">
-			<a class="btn">Button</a>
-		</div>
-	</div>
+	</nav>
 </template>
+
+<script setup lang="ts">
+// No changes needed in the script for this specific case
+</script>
