@@ -59,7 +59,8 @@ const fetchSymbols = async () => {
   }
 
   // const url = `http://localhost:5001/api/symbol_search?keywords=${query.value}`;
-  const url = `http://3.22.166.72:5001/api/symbol_search?keywords=${query.value}`;
+  // const url = `http://3.22.166.72:5001/api/symbol_search?keywords=${query.value}`;
+  const url = `https://quantifiapp.com/api/symbol_search?keywords=${query.value}`;
 
   try {
     const response = await axios.get(url);
