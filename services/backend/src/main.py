@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://3.22.166.72", "http://localhost:8080", "http://localhost:5173", "http://quantifiapp.com", "http://www.quantifiapp.com", "http://3.22.166.72:8080"],
+    allow_origins=["http://3.22.166.72", "http://localhost:8080", "http://localhost:5173", "http://quantifiapp.com", "http://www.quantifiapp.com", "http://3.22.166.72:8080", "https://quantifiapp.com", "https://www.quantifiapp.com", "https://3.22.166.72:8080"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
