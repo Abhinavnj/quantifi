@@ -12,11 +12,12 @@ export default {
   ],
   daisyui: {
     themes: [
-      {
-        light: {
-          ...require("daisyui/src/theming/themes")["dark"]
-        },
-      },
+      "light"
+      // {
+      // light: {
+      //   ...require("daisyui/src/theming/themes")["fantasy"]
+      // },
+      // },
     ],
   },
 }

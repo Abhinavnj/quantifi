@@ -1,16 +1,15 @@
 <template>
-	<footer class="relative z-10 bg-gray-900 py-4">
-		<div class="container mx-auto text-center">
-			<p class="text-gray-400">&copy; 2024 Quantifi. All rights reserved.</p>
-			<p class="text-gray-400">
-				Made by
-				<a
-					href="https://www.linkedin.com/in/sirohiabhinav/"
-					class="text-primary hover:underline ml-1"
-					target="_blank"
-					>Abhi</a
-				>
-			</p>
-		</div>
-	</footer>
+  <footer class="relative z-10 bg-gray-900 py-4">
+    <div class="container mx-auto text-center">
+      <router-link to="/contact" class="text-base font-medium text-white hover:text-primary">
+        Contact Us
+      </router-link>
+      <p class="text-gray-400">&copy; 2024 Quantifi. All rights reserved.</p>
+      <!-- <p class="text-gray-400">
+        Made by
+        <a href="https://www.linkedin.com/in/sirohiabhinav/" class="text-primary hover:underline ml-1"
+          target="_blank">Abhi</a>
+      </p> -->
+    </div>
+  </footer>
 </template>
