@@ -23,6 +23,12 @@
                 Learn
               </router-link>
             </li>
+            <li>
+              <!-- Use router-link for navigation to the Contact page -->
+              <router-link to="/personalfinance" class="text-base font-medium text-white hover:text-primary">
+                Personal Finance
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="navbar-end">

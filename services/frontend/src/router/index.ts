@@ -32,6 +32,11 @@ const routes = [
     name: 'LearnHome',
     component: LearnHome,
   },
+  {
+    path: '/personalfinance',
+    name: 'PersonalFinance',
+    component: LearnHome,
+  },
 ];
 
 const router = createRouter({
