@@ -3,48 +3,57 @@
     <Navbar />
 
     <!-- Main Content -->
-    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left p-10">
+    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left p-10 space-y-8">
       <!-- Company logo and name in the top left -->
-      <div class="flex items-center space-x-4 mb-6">
+      <div class="flex items-center space-x-6 mb-8 animate-fadeIn">
         <!-- Bind src to the tickerLogo variable and make it circular -->
         <img :src="tickerLogo" alt="Logo" v-if="tickerLogo"
-          class="h-16 w-16 object-contain rounded-full border border-white" />
-        <h1 class="text-4xl font-bold text-white">{{ symbolName }}</h1>
+          class="h-20 w-20 object-contain rounded-full border border-white shadow-lg" />
+        <h1 class="text-5xl font-extrabold text-white">{{ symbolName }}</h1>
       </div>
 
       <!-- Tab component -->
-      <div role="tablist" class="tabs tabs-boxed mb-6">
-        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'overview' }"
+      <div role="tablist" class="tabs tabs-boxed mb-6 animate-fadeIn">
+        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'overview' }"
           @click="activeTab = 'overview'">Overview</a>
-        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'financials' }"
+        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'financials' }"
           @click="activeTab = 'financials'">Financials</a>
-        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'news' }" @click="activeTab = 'news'">News</a>
+        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'news' }"
+          @click="activeTab = 'news'">News</a>
       </div>
 
       <!-- Tab Content -->
-      <div v-if="activeTab === 'overview'">
-        <!-- Display the ticker stats for Previous Open and Previous Close next to each other -->
-        <div class="grid grid-cols-2 gap-6">
-          <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
-          <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
+      <div v-if="activeTab === 'overview'" class="w-full animate-fadeIn">
+        <div class="flex flex-col items-start lg:flex-row lg:space-x-6 bg-gray-800 p-6 rounded-lg shadow-xl">
+          <!-- Display the ticker stats for Previous Open and Previous Close next to each other -->
+          <div class="card w-full lg:w-1/2 bg-neutral-focus text-white shadow-lg transition-all hover:shadow-2xl">
+            <div class="card-body">
+              <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
+            </div>
+          </div>
+          <div class="card w-full lg:w-1/2 bg-neutral-focus text-white shadow-lg transition-all hover:shadow-2xl">
+            <div class="card-body">
+              <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div v-if="activeTab === 'financials'">
-        <p class="text-lg text-gray-300">
-          Financial data will go here.
-        </p>
+      <div v-if="activeTab === 'financials'" class="animate-fadeIn">
+        <div class="card w-full bg-gray-800 p-6 rounded-lg shadow-lg text-gray-100 transition-all hover:shadow-2xl">
+          <p class="text-lg">
+            Financial data will go here.
+          </p>
+        </div>
       </div>
 
-      <div v-if="activeTab === 'news'">
-        <p class="text-lg text-gray-300">
-          Latest news articles will go here.
-        </p>
+      <div v-if="activeTab === 'news'" class="animate-fadeIn">
+        <div class="card w-full bg-gray-800 p-6 rounded-lg shadow-lg text-gray-100 transition-all hover:shadow-2xl">
+          <p class="text-lg">
+            Latest news articles will go here.
+          </p>
+        </div>
       </div>
-
-      <p class="text-lg text-gray-300 mt-8">
-        Detailed analysis for the selected symbol: {{ symbol }}.
-      </p>
 
     </main>
 
@@ -92,10 +101,29 @@ onMounted(() => {
 </script>
 
 <style scoped>
-img {
-  border-radius: 50%;
-  /* Circular view */
-  border: 2px solid white;
-  /* Optional: add a border around the logo */
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Card hover effects */
+.card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 </style>
