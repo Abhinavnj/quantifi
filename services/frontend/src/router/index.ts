@@ -23,12 +23,12 @@ const routes = [
     component: Contact,
   },
   {
-    path: '/analysishome',
+    path: '/analysis',
     name: 'AnalysisHome',
     component: AnalysisHome,
   },
   {
-    path: '/learnhome',
+    path: '/learn',
     name: 'LearnHome',
     component: LearnHome,
   },

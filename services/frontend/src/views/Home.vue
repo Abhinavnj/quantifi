@@ -1,5 +1,5 @@
 <template>
-  <div data-theme="light" class="relative flex flex-col min-h-screen bg-gray-900">
+  <div data-theme="custom-dark" class="relative flex flex-col min-h-screen">
     <Navbar />
 
     <!-- Main Content -->

@@ -1,0 +1,551 @@
+{
+	"data": {
+		"overview": {
+			"name": "Apple Inc.",
+			"close": 220.3201,
+			"open": 218.92,
+			"high": 220.66,
+			"low": 216.73,
+			"todays_change": -0.5465999999999838,
+			"todays_change_percentage": -0.24743108053052543,
+			"last_minute_price": 220.47,
+			"logo_base64": "data:image/png;base64,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"
+		},
+		"financials": {
+			"basic_earnings_per_share": 6.59
+		},
+		"news": [
+			{
+				"id": "fbced0e8d34ad32177f84bd4e9739d89d772ba36fe127ae61f4e64aa81aacf7e",
+				"publisher": {
+					"name": "GlobeNewswire Inc.",
+					"homepage_url": "https://www.globenewswire.com",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/globenewswire.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/globenewswire.ico"
+				},
+				"title": "Gesture Recognition and Touchless Sensing Market is Expected to Reach USD 127.78 Billion by 2032, Fueled by Increased Use in Various Industries",
+				"author": "Sns Insider",
+				"published_utc": "2024-09-10T12:42:00Z",
+				"article_url": "https://www.globenewswire.com/news-release/2024/09/10/2943677/0/en/Gesture-Recognition-and-Touchless-Sensing-Market-is-Expected-to-Reach-USD-127-78-Billion-by-2032-Fueled-by-Increased-Use-in-Various-Industries.html",
+				"tickers": [
+					"INTC",
+					"JBL",
+					"MCHP",
+					"SONY",
+					"MSFT",
+					"GOOG",
+					"GOOGL",
+					"AAPL"
+				],
+				"image_url": "https://ml.globenewswire.com/Resource/Download/cb2adc75-7bac-484e-a705-cb2addc4a99e",
+				"description": "The Gesture Recognition and Touchless Sensing Market is expected to grow significantly, driven by advancements in technology and increasing adoption in various industries, including consumer electronics, automotive, and healthcare.",
+				"keywords": [
+					"gesture recognition",
+					"touchless sensing",
+					"consumer electronics",
+					"automotive",
+					"healthcare"
+				],
+				"insights": [
+					{
+						"ticker": "INTC",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Intel Corporation as one of the key companies in the Gesture Recognition and Touchless Sensing market, indicating its involvement and potential growth opportunities in this space."
+					},
+					{
+						"ticker": "JBL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article lists Jabil Inc. as one of the key companies in the Gesture Recognition and Touchless Sensing market, suggesting its participation and potential to benefit from the market's growth."
+					},
+					{
+						"ticker": "MCHP",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Microchip Technology Inc. is mentioned as one of the key companies in the Gesture Recognition and Touchless Sensing market, indicating its involvement and potential to capitalize on the market's expansion."
+					},
+					{
+						"ticker": "SONY",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article includes Sony Corporation as one of the key players in the Gesture Recognition and Touchless Sensing market, suggesting its participation and potential to benefit from the market's growth."
+					},
+					{
+						"ticker": "MSFT",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Microsoft Corporation is included as one of the key players in the Gesture Recognition and Touchless Sensing market, indicating its involvement and potential to capitalize on the market's expansion."
+					},
+					{
+						"ticker": "GOOG",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Google LLC as one of the key companies in the Gesture Recognition and Touchless Sensing market, suggesting its participation and potential to contribute to the market's growth."
+					},
+					{
+						"ticker": "GOOG",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Google LLC as one of the key companies in the Gesture Recognition and Touchless Sensing market, suggesting its participation and potential to contribute to the market's growth."
+					},
+					{
+						"ticker": "GOOGL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Google LLC as one of the key companies in the Gesture Recognition and Touchless Sensing market, suggesting its participation and potential to contribute to the market's growth."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Apple Inc. is mentioned as one of the key companies in the Gesture Recognition and Touchless Sensing market, indicating its involvement and potential to capitalize on the market's expansion."
+					}
+				]
+			},
+			{
+				"id": "b232a07f6b615c8383861b2660806a651acac276bea74d0e3a092c6f853d3eb2",
+				"publisher": {
+					"name": "Benzinga",
+					"homepage_url": "https://www.benzinga.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/benzinga.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/benzinga.ico"
+				},
+				"title": "Nasdaq, S&P 500 Futures Slip As Traders Eye Presidential Debate, Oracle Rallies Over 8%: Economist Points This Shift In Broader Market Trend Amid Flurry Of Weak Data",
+				"author": "Benzinga Editor",
+				"published_utc": "2024-09-10T11:05:10Z",
+				"article_url": "https://www.benzinga.com/news/earnings/24/09/40789317/nasdaq-s-p-500-futures-slip-as-traders-eye-presidential-debate-oracle-rallies-over-8-economist-poin",
+				"tickers": ["QQQ", "SPY", "ORCL", "AAPL", "GOOG", "GOOGL"],
+				"image_url": "https://cdn.benzinga.com/files/images/story/2024/09/10/nyse-shutter.jpeg?width=1200&height=800&fit=crop",
+				"description": "Wall Street is cautious ahead of this week's key inflation reports, which will shape the Fed's policy decisions. Bargain hunting helped reverse sentiment on Monday, but the market remains volatile as traders await the economic data and the first presidential debate.",
+				"keywords": [
+					"inflation",
+					"Federal Reserve",
+					"market sentiment",
+					"economic data"
+				],
+				"insights": [
+					{
+						"ticker": "QQQ",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "The article mentions that the Invesco QQQ ETF slipped 0.04% in premarket trading, indicating a cautious market sentiment."
+					},
+					{
+						"ticker": "SPY",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "The article states that the SPDR S&P 500 ETF edged up 0.02% in premarket trading, suggesting a neutral market sentiment."
+					},
+					{
+						"ticker": "ORCL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions that Oracle's earnings and management comments regarding data center needs could buoy the tech space, indicating a positive sentiment."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "negative",
+						"sentiment_reasoning": "The article notes that Apple retreated over 1% due to adverse EU court rulings, suggesting a negative sentiment."
+					},
+					{
+						"ticker": "GOOG",
+						"sentiment": "negative",
+						"sentiment_reasoning": "The article states that Alphabet edged down due to the EU court rulings, indicating a negative sentiment."
+					},
+					{
+						"ticker": "GOOG",
+						"sentiment": "negative",
+						"sentiment_reasoning": "The article states that Alphabet edged down due to the EU court rulings, indicating a negative sentiment."
+					},
+					{
+						"ticker": "GOOGL",
+						"sentiment": "negative",
+						"sentiment_reasoning": "The article states that Alphabet edged down due to the EU court rulings, indicating a negative sentiment."
+					}
+				]
+			},
+			{
+				"id": "bdcf3b616638a2a69c509cbb3fca24a996daaee262c7ecfb4977b43fc94f44da",
+				"publisher": {
+					"name": "The Motley Fool",
+					"homepage_url": "https://www.fool.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/themotleyfool.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/themotleyfool.ico"
+				},
+				"title": "Prediction: This Growth ETF Will Beat the Market Over the Next 5 Years",
+				"author": "Jennifer Saibil",
+				"published_utc": "2024-09-10T10:34:00Z",
+				"article_url": "https://www.fool.com/investing/2024/09/10/prediction-this-growth-etf-will-beat-the-market-ov/?source=iedfolrf0000001",
+				"tickers": ["VUG", "AAPL", "MSFT", "NVDA", "AMZN", "META", "LLY", "V"],
+				"image_url": "https://g.foolcdn.com/editorial/images/789587/couple-high-five-in-front-of-laptop-1200x800-5b2df79.jpg",
+				"description": "The Vanguard Growth ETF (VUG) is likely to outperform the broader market over the next 5 years and longer. It tracks the CRSP US Large Cap Growth Index, owning about 200 of the largest and most growth-oriented stocks in the S&P 500. The ETF has outperformed the market by over 2 percentage points annually over the past 10 years, and its strategy and makeup are expected to continue this trend.",
+				"keywords": [
+					"Vanguard Growth ETF",
+					"S&P 500",
+					"growth investing",
+					"index funds",
+					"ETFs"
+				],
+				"insights": [
+					{
+						"ticker": "VUG",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article suggests that the Vanguard Growth ETF is likely to outperform the broader market over the next 5 years and longer, as it has done over the past 10 years. The ETF's strategy of investing in the largest and most growth-oriented stocks in the S&P 500 is expected to continue delivering strong returns."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Apple is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "MSFT",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Microsoft is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "NVDA",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Nvidia is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "AMZN",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Amazon is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "META",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Meta Platforms (formerly Facebook) is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "LLY",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Eli Lilly is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					},
+					{
+						"ticker": "V",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Visa is mentioned as one of the top-10 holdings of the Vanguard Growth ETF, indicating that the ETF is invested in large, established, and growth-oriented companies."
+					}
+				]
+			},
+			{
+				"id": "59e79527d7c256b31fc9211b2870ff55910fae42f60952b1245f51a67b5e0a24",
+				"publisher": {
+					"name": "The Motley Fool",
+					"homepage_url": "https://www.fool.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/themotleyfool.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/themotleyfool.ico"
+				},
+				"title": "Billionaires Are Buying These 2 Top Artificial Intelligence (AI) Stocks Hand Over Fist",
+				"author": "The Motley Fool",
+				"published_utc": "2024-09-10T09:15:00Z",
+				"article_url": "https://www.fool.com/investing/2024/09/10/billionaires-are-buying-these-2-top-artificial-int/?source=iedfolrf0000001",
+				"tickers": ["AVGO", "AAPL"],
+				"image_url": "https://g.foolcdn.com/editorial/images/789992/analyst-smiling-and-looking-at-laptop.jpg",
+				"description": "Billionaires are actively investing in Broadcom and Apple, two companies that are well-positioned to benefit from the growing demand for AI-powered technologies. Broadcom's AI-optimized networking solutions and custom AI accelerators, as well as its acquisition of VMware, are driving its growth. Apple's ecosystem of products and services, including the upcoming iOS 18 with AI integration, are expected to boost iPhone sales and its highly profitable services business.",
+				"keywords": [
+					"Artificial Intelligence",
+					"Broadcom",
+					"Apple",
+					"Billionaires",
+					"Investment"
+				],
+				"insights": [
+					{
+						"ticker": "AVGO",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Broadcom's AI-optimized networking solutions and custom AI accelerators are driving its growth, and the acquisition of VMware has strengthened its enterprise software portfolio. The company's solid fundamentals and robust growth prospects make it an attractive investment option."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Apple's ecosystem of products and services, including the upcoming iOS 18 with AI integration, are expected to boost iPhone sales and its highly profitable services business. The company's strong performance and the interest from billionaire investors make it a compelling investment opportunity."
+					}
+				]
+			},
+			{
+				"id": "676439881a065d62521d3738670f1c4828774ea24494f7deaaca878f5eeec49e",
+				"publisher": {
+					"name": "The Motley Fool",
+					"homepage_url": "https://www.fool.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/themotleyfool.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/themotleyfool.ico"
+				},
+				"title": "Have $100,000? Here Are 3 Ways to Grow That Money Into $1 Million for Retirement Savings",
+				"author": "James Brumley",
+				"published_utc": "2024-09-10T08:55:00Z",
+				"article_url": "https://www.fool.com/retirement/2024/09/10/have-100k-ways-grow-million-retirement-savings/?source=iedfolrf0000001",
+				"tickers": ["VUG", "SPY", "KO", "NVDA", "AAPL", "EA", "AVGO", "MNST"],
+				"image_url": "https://g.foolcdn.com/editorial/images/790009/compound-interest-growth.jpg",
+				"description": "The article discusses three strategies to grow a $100,000 investment into $1 million for retirement: investing in growth stocks, dividend-paying stocks, and index funds. It highlights the potential returns and risks associated with each approach.",
+				"keywords": [
+					"retirement savings",
+					"investment strategies",
+					"growth stocks",
+					"dividend stocks",
+					"index funds"
+				],
+				"insights": [
+					{
+						"ticker": "VUG",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article notes that the Vanguard Growth ETF has outperformed the S&P 500 index over the past 20 years, with an average annual gain of just under 11% compared to the S&P 500's 8%."
+					},
+					{
+						"ticker": "SPY",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "The article presents the SPDR S&P 500 ETF Trust as a proxy for the broad market, with average returns of around 10% per year."
+					},
+					{
+						"ticker": "KO",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article highlights Coca-Cola as an example of a company with a solid dividend pedigree, having increased its dividend for 62 consecutive years."
+					},
+					{
+						"ticker": "NVDA",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Nvidia as one of the current market-leading growth stocks."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Apple as one of the current market-leading growth stocks."
+					},
+					{
+						"ticker": "EA",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article notes that Electronic Arts was a must-have growth stock a decade ago."
+					},
+					{
+						"ticker": "AVGO",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article mentions Broadcom (previously Avago) as a must-have growth stock a decade ago."
+					},
+					{
+						"ticker": "MNST",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article notes that Monster Beverage was a market-leading growth stock 20 years ago."
+					}
+				]
+			},
+			{
+				"id": "eabcca72c6a83d7bafe094a54962e56230cc5e20cfd54bcf9f888ce87fd763d9",
+				"publisher": {
+					"name": "The Motley Fool",
+					"homepage_url": "https://www.fool.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/themotleyfool.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/themotleyfool.ico"
+				},
+				"title": "29.5% of Warren Buffett's $305.7 Billion Portfolio Is Invested in 2 Artificial Intelligence (AI) Stocks",
+				"author": "The Motley Fool",
+				"published_utc": "2024-09-10T08:47:00Z",
+				"article_url": "https://www.fool.com/investing/2024/09/10/295-warren-buffetts-3057-billion-in-2-ai-stocks/?source=iedfolrf0000001",
+				"tickers": ["AAPL", "AMZN"],
+				"image_url": "https://g.foolcdn.com/editorial/images/790050/warren-buffett-smiling-surrounded-by-cameras.jpg",
+				"description": "Warren Buffett's Berkshire Hathaway has significant investments in Apple and Amazon, which are poised to benefit from the growth of artificial intelligence. Apple is developing its own AI assistant, while Amazon Web Services is offering AI solutions for businesses.",
+				"keywords": [
+					"Warren Buffett",
+					"Berkshire Hathaway",
+					"Apple",
+					"Amazon",
+					"Artificial Intelligence"
+				],
+				"insights": [
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Apple is preparing to leverage its large user base and next-generation chips to distribute AI capabilities, which could drive a major iPhone upgrade cycle and continued growth for the company."
+					},
+					{
+						"ticker": "AMZN",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Amazon Web Services is positioning itself as a leading provider of AI solutions for businesses, including its own data center chips and large language models, which could be a significant growth opportunity for the company."
+					}
+				]
+			},
+			{
+				"id": "073178ef580ffc55ed8cb7306b07058152d312863c7d7f7497315d1b6cfd6eff",
+				"publisher": {
+					"name": "Benzinga",
+					"homepage_url": "https://www.benzinga.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/benzinga.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/benzinga.ico"
+				},
+				"title": "Apple Stock Hits 4-Week Low After iPhone 16 Launch; Analyst Previously Noted 30-60 Day Recovery Trend",
+				"author": "Piero Cingari, Benzinga Staff Writer",
+				"published_utc": "2024-09-09T19:26:35Z",
+				"article_url": "https://www.benzinga.com/analyst-ratings/analyst-color/24/09/40780721/apple-stock-hits-4-week-low-after-iphone-16-launch-analyst-previously-noted-30-60-d",
+				"tickers": ["AAPL"],
+				"image_url": "https://cdn.benzinga.com/files/images/story/2024/09/09/iphone-shutter2.jpeg?width=1200&height=800&fit=crop",
+				"description": "Apple's stock fell 1.4% to $218 after the launch of the iPhone 16, reaching a 4-week low. However, an analyst expects a recovery in 30-60 days, noting that Apple's new AI features could drive a multi-year upgrade cycle.",
+				"keywords": ["Apple", "iPhone 16", "Analyst", "Stock Price"],
+				"insights": [
+					{
+						"ticker": "AAPL",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "The article presents a mixed sentiment towards Apple. While the stock price fell after the iPhone 16 launch, the analyst expects a recovery in the next 30-60 days and believes the new AI features could drive a multi-year upgrade cycle, suggesting a neutral overall sentiment."
+					}
+				]
+			},
+			{
+				"id": "99b415130225ef5c7b9d9527bd63f1aa90ed1202b156c87bcfddd48414d30b4b",
+				"publisher": {
+					"name": "Benzinga",
+					"homepage_url": "https://www.benzinga.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/benzinga.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/benzinga.ico"
+				},
+				"title": "Why Investing in Small-Cap Stocks Could Lead to Significant Gains for Savvy Investors",
+				"author": "Subhankar Bhattacharjee",
+				"published_utc": "2024-09-09T19:00:39Z",
+				"article_url": "https://www.benzinga.com/news/small-cap/24/09/40780410/why-investing-in-small-cap-stocks-could-lead-to-significant-gains-for-savvy-investors",
+				"tickers": ["MSFT", "AAPL", "IWM", "VB"],
+				"image_url": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+				"description": "Small-cap stocks offer significant growth potential for investors willing to accept higher volatility. These lesser-known companies have not yet reached their peak, unlike larger, more mature corporations. Investing in small-cap stocks or ETFs can provide opportunities for outsized returns, though it requires a long-term perspective to weather the price swings.",
+				"keywords": [
+					"small-cap stocks",
+					"growth potential",
+					"volatility",
+					"long-term investing"
+				],
+				"insights": [
+					{
+						"ticker": "MSFT",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "The article suggests that larger, more mature companies like Microsoft have already passed their greatest growth phases, limiting their potential for significant gains."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "neutral",
+						"sentiment_reasoning": "Similar to Microsoft, the article suggests that larger, more mature companies like Apple have already passed their greatest growth phases, limiting their potential for significant gains."
+					},
+					{
+						"ticker": "IWM",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article recommends the iShares Russell 2000 ETF as a way for investors to gain diversified exposure to small-cap stocks and their growth potential, without the risk of selecting individual winners and losers."
+					},
+					{
+						"ticker": "VB",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article also recommends the Vanguard Small-Cap ETF as a way for investors to gain diversified exposure to small-cap stocks and their growth potential, without the risk of selecting individual winners and losers."
+					}
+				]
+			},
+			{
+				"id": "078b64fc30e2fa8146c66f59cb07735573b2049c480b2dc0586b6387a89ede1e",
+				"publisher": {
+					"name": "Benzinga",
+					"homepage_url": "https://www.benzinga.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/benzinga.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/benzinga.ico"
+				},
+				"title": "Wall Street Rallies After Last Week's Sell-Off, Palantir Soars On S&P 500 Inclusion, Airlines Rally: What's Driving Markets Monday?",
+				"author": "Piero Cingari, Benzinga Staff Writer",
+				"published_utc": "2024-09-09T17:35:56Z",
+				"article_url": "https://www.benzinga.com/markets/equities/24/09/40779042/wall-street-rallies-after-last-weeks-sell-off-palantir-soars-on-s-p-500-inclusion-airlines-rally",
+				"tickers": ["AAPL", "PLTR", "JETS", "MRNA", "ARM"],
+				"image_url": "https://cdn.benzinga.com/files/images/story/2024/09/09/Wall-Street-subway-station.jpeg?width=1200&height=800&fit=crop",
+				"description": "U.S. stocks rallied on Monday, with all major indices in the green, led by gains in airlines and Palantir's surge on S&P 500 inclusion news. Investors are anticipating a slowdown in inflation data and potential rate cuts from the Federal Reserve.",
+				"keywords": [
+					"Wall Street",
+					"Palantir",
+					"Airlines",
+					"Inflation",
+					"Federal Reserve"
+				],
+				"insights": [
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Investors are anticipating a boost from Apple's highly anticipated event."
+					},
+					{
+						"ticker": "PLTR",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Palantir surged 13% on news of its inclusion in the S&P 500 index."
+					},
+					{
+						"ticker": "JETS",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Airline stocks led the charge, with the U.S. Global Jets ETF rising 2.6%."
+					},
+					{
+						"ticker": "MRNA",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Moderna surged 7% after its manufacturing facility received a Drug Establishment License from Health Canada."
+					},
+					{
+						"ticker": "ARM",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Arm Holdings rallied 7% after reports that its AI chip technology will be integrated into Apple's upcoming iPhone 16."
+					}
+				]
+			},
+			{
+				"id": "6fe9e0c534c8fc4a2535ee24cbce459ce7e69426019e3c2f30f6ee93768e4e07",
+				"publisher": {
+					"name": "The Motley Fool",
+					"homepage_url": "https://www.fool.com/",
+					"logo_url": "https://s3.polygon.io/public/assets/news/logos/themotleyfool.svg",
+					"favicon_url": "https://s3.polygon.io/public/assets/news/favicons/themotleyfool.ico"
+				},
+				"title": "Here's How Investing $100 a Month Plus Your Tax Return Can Put You On a Path to Becoming a Millionaire",
+				"author": "David Jagielski",
+				"published_utc": "2024-09-08T16:40:00Z",
+				"article_url": "https://www.fool.com/investing/2024/09/08/heres-how-investing-100-a-month-plus-your-tax-retu/?source=iedfolrf0000001",
+				"tickers": ["VUG", "AAPL", "MSFT", "NVDA"],
+				"image_url": "https://g.foolcdn.com/editorial/images/789255/an-advisor-explaining-a-financial-chart-to-a-client.jpg",
+				"description": "Investing $100 per month plus your tax refund in growth-focused ETFs like the Vanguard Growth Index Fund ETF (VUG) can help you become a millionaire in 25-30 years, with potential returns of over 12% annually.",
+				"keywords": [
+					"investing",
+					"tax return",
+					"ETFs",
+					"growth stocks",
+					"Vanguard Growth Index Fund ETF"
+				],
+				"insights": [
+					{
+						"ticker": "VUG",
+						"sentiment": "positive",
+						"sentiment_reasoning": "The article recommends the Vanguard Growth Index Fund ETF as a top fund choice for the investment strategy, citing its diversification, low expense ratio, and historical returns of around 12.2% annually over the past 20 years."
+					},
+					{
+						"ticker": "AAPL",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Apple is mentioned as one of the top three holdings of the Vanguard Growth Index Fund ETF, indicating the fund's exposure to large, growth-oriented tech stocks."
+					},
+					{
+						"ticker": "MSFT",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Microsoft is mentioned as one of the top three holdings of the Vanguard Growth Index Fund ETF, indicating the fund's exposure to large, growth-oriented tech stocks."
+					},
+					{
+						"ticker": "NVDA",
+						"sentiment": "positive",
+						"sentiment_reasoning": "Nvidia is mentioned as one of the top three holdings of the Vanguard Growth Index Fund ETF, indicating the fund's exposure to large, growth-oriented tech stocks."
+					}
+				]
+			}
+		]
+	},
+	"status": 200,
+	"statusText": "OK",
+	"headers": {
+		"content-length": "28054",
+		"content-type": "application/json"
+	},
+	"config": {
+		"transitional": {
+			"silentJSONParsing": true,
+			"forcedJSONParsing": true,
+			"clarifyTimeoutError": false
+		},
+		"adapter": ["xhr", "http", "fetch"],
+		"transformRequest": [null],
+		"transformResponse": [null],
+		"timeout": 0,
+		"xsrfCookieName": "XSRF-TOKEN",
+		"xsrfHeaderName": "X-XSRF-TOKEN",
+		"maxContentLength": -1,
+		"maxBodyLength": -1,
+		"env": {},
+		"headers": {
+			"Accept": "application/json, text/plain, */*"
+		},
+		"withCredentials": true,
+		"baseURL": "http://3.22.166.72:5001/",
+		"method": "get",
+		"url": "http://localhost:5001/api/analysis/ticker?ticker=AAPL"
+	},
+	"request": {}
+}

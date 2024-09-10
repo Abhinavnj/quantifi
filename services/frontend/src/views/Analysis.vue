@@ -1,59 +1,68 @@
 <template>
-  <div class="relative flex flex-col min-h-screen bg-gray-900 overflow-hidden">
+  <div class="relative flex flex-col min-h-screen overflow-hidden">
     <Navbar />
 
     <!-- Main Content -->
-    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left p-10 space-y-8">
+    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left p-10">
       <!-- Company logo and name in the top left -->
-      <div class="flex items-center space-x-6 mb-8 animate-fadeIn">
+      <div class="flex items-center space-x-4 mb-6">
         <!-- Bind src to the tickerLogo variable and make it circular -->
         <img :src="tickerLogo" alt="Logo" v-if="tickerLogo"
-          class="h-20 w-20 object-contain rounded-full border border-white shadow-lg" />
-        <h1 class="text-5xl font-extrabold text-white">{{ symbolName }}</h1>
+          class="h-16 w-16 object-contain rounded-full border border-white" />
+        <h1 class="text-4xl font-bold text-white">{{ symbolName }}</h1>
       </div>
 
       <!-- Tab component -->
-      <div role="tablist" class="tabs tabs-boxed mb-6 animate-fadeIn">
-        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'overview' }"
+      <div role="tablist" class="tabs tabs-boxed mb-6">
+        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'overview' }"
           @click="activeTab = 'overview'">Overview</a>
-        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'financials' }"
+        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'financials' }"
           @click="activeTab = 'financials'">Financials</a>
-        <a role="tab" class="tab transition-all hover:scale-105" :class="{ 'tab-active': activeTab === 'news' }"
-          @click="activeTab = 'news'">News</a>
+        <a role="tab" class="tab" :class="{ 'tab-active': activeTab === 'news' }" @click="activeTab = 'news'">News</a>
       </div>
 
-      <!-- Tab Content -->
-      <div v-if="activeTab === 'overview'" class="w-full animate-fadeIn">
-        <div class="flex flex-col items-start lg:flex-row lg:space-x-6 bg-gray-800 p-6 rounded-lg shadow-xl">
-          <!-- Display the ticker stats for Previous Open and Previous Close next to each other -->
-          <div class="card w-full lg:w-1/2 bg-neutral-focus text-white shadow-lg transition-all hover:shadow-2xl">
-            <div class="card-body">
-              <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
+      <!-- Overview Tab Content -->
+      <div v-if="activeTab === 'overview'">
+        <!-- Display all the 'overview' data -->
+        <div class="grid grid-cols-2 gap-6">
+          <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
+          <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
+          <StatDisplay v-if="tickerHigh" title="High" :value="tickerHigh" />
+          <StatDisplay v-if="tickerLow" title="Low" :value="tickerLow" />
+          <StatDisplay v-if="todaysChange" title="Today's Change" :value="todaysChange" />
+          <StatDisplay v-if="todaysChangePercentage" title="Change %" :value="todaysChangePercentage" />
+          <StatDisplay v-if="lastMinutePrice" title="Last Minute Price" :value="lastMinutePrice" />
+        </div>
+      </div>
+
+      <!-- Financials Tab Content -->
+      <div v-if="activeTab === 'financials'">
+        <div class="grid grid-cols-2 gap-6">
+          <StatDisplay v-if="basicEarningsPerShare" title="Earnings Per Share" :value="basicEarningsPerShare" />
+        </div>
+      </div>
+
+      <!-- News Tab Content -->
+      <div v-if="activeTab === 'news'">
+        <div v-for="article in news" :key="article.title" class="p-4 mb-4 rounded-lg bg-base-300">
+          <!-- News Item -->
+          <div class="flex items-center space-x-4 mb-4">
+            <img :src="article.publisher_logo" alt="Publisher Logo" class="h-10 w-10 object-contain" />
+            <div>
+              <h3 class="text-xl font-bold">{{ article.publisher_name }}</h3>
+              <p class="text-sm text-gray-400">{{ article.published_datetime }}</p>
             </div>
           </div>
-          <div class="card w-full lg:w-1/2 bg-neutral-focus text-white shadow-lg transition-all hover:shadow-2xl">
-            <div class="card-body">
-              <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
-            </div>
-          </div>
+          <h4 class="text-lg font-semibold mb-2">{{ article.title }}</h4>
+          <p class="text-sm text-gray-300">Sentiment: <span :class="getSentimentColor(article.sentiment)">{{
+          article.sentiment }}</span></p>
+          <p class="text-sm text-gray-400 italic">Reasoning: {{ article.sentiment_reasoning }}</p>
         </div>
       </div>
 
-      <div v-if="activeTab === 'financials'" class="animate-fadeIn">
-        <div class="card w-full bg-gray-800 p-6 rounded-lg shadow-lg text-gray-100 transition-all hover:shadow-2xl">
-          <p class="text-lg">
-            Financial data will go here.
-          </p>
-        </div>
-      </div>
-
-      <div v-if="activeTab === 'news'" class="animate-fadeIn">
-        <div class="card w-full bg-gray-800 p-6 rounded-lg shadow-lg text-gray-100 transition-all hover:shadow-2xl">
-          <p class="text-lg">
-            Latest news articles will go here.
-          </p>
-        </div>
-      </div>
+      <!-- <p class="text-lg text-gray-300 mt-8">
+        Selected symbol: {{ symbol }}
+      </p> -->
 
     </main>
 
@@ -75,18 +84,32 @@ const symbol = ref(route.params.symbol);
 const symbolName = ref("");
 const tickerPrevClose = ref("");
 const tickerPrevOpen = ref("");
+const tickerHigh = ref("");
+const tickerLow = ref("");
+const todaysChange = ref("");
+const todaysChangePercentage = ref("");
+const lastMinutePrice = ref("");
 const tickerLogo = ref("");
+const basicEarningsPerShare = ref("");
 const activeTab = ref('overview'); // Track which tab is active
+const news = ref([]); // Store news articles
 
 // Function to fetch ticker data from the API
 const fetchTickerData = async () => {
   try {
     const response = await axios.get(`http://localhost:5001/api/analysis/ticker?ticker=${symbol.value}`);
-
-    tickerPrevClose.value = response.data.close;
-    tickerPrevOpen.value = response.data.open;
-    tickerLogo.value = response.data.logo_base64;  // Assuming 'logo_base64' is the key for the logo
-    symbolName.value = response.data.name;  // Assuming 'name' is the key for the symbol name
+    console.log(response);
+    tickerPrevClose.value = response.data.overview.close;
+    tickerPrevOpen.value = response.data.overview.open;
+    tickerHigh.value = response.data.overview.high;
+    tickerLow.value = response.data.overview.low;
+    todaysChange.value = response.data.overview.todays_change;
+    todaysChangePercentage.value = response.data.overview.todays_change_percentage;
+    lastMinutePrice.value = response.data.overview.last_minute_price;
+    tickerLogo.value = response.data.overview.logo_base64;
+    symbolName.value = response.data.overview.name;
+    basicEarningsPerShare.value = response.data.financials.basic_earnings_per_share;
+    news.value = response.data.news; // Store news articles
   } catch (error) {
     console.error("Error fetching ticker data:", error);
     tickerPrevClose.value = "N/A";
@@ -98,32 +121,20 @@ const fetchTickerData = async () => {
 onMounted(() => {
   fetchTickerData();
 });
+
+// Helper function to get the sentiment color
+const getSentimentColor = (sentiment) => {
+  if (sentiment === 'positive') return 'text-green-500';
+  if (sentiment === 'negative') return 'text-red-500';
+  return 'text-yellow-500'; // Neutral sentiment
+};
 </script>
 
 <style scoped>
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Card hover effects */
-.card {
-  transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-  transform: scale(1.03);
+img {
+  border-radius: 50%;
+  /* Circular view */
+  border: 2px solid white;
+  /* Optional: add a border around the logo */
 }
 </style>

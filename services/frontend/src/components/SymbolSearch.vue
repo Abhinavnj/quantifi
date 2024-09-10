@@ -21,7 +21,7 @@
     <ul v-if="symbols.length && query"
       class="absolute top-full mt-2 w-full bg-gray-800 border border-gray-600 rounded-lg z-10 shadow-lg">
       <li v-for="(symbol, index) in limitedSymbols" :key="index" @click="selectSymbol(symbol)"
-        :class="['px-4 py-2 cursor-pointer flex items-center space-x-2', activeIndex === index ? 'bg-gray-700 text-white' : 'text-gray-300']">
+        :class="['px-4 py-2 cursor-pointer flex items-center space-x-2', activeIndex === index ? 'bg-neutral text-white' : 'text-gray-300']">
         <span class="font-medium">{{ symbol.ticker }}</span>
         <span class="text-sm text-gray-400">- {{ symbol.name }}</span>
       </li>

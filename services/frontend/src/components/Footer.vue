@@ -1,5 +1,5 @@
 <template>
-  <footer class="relative z-10 bg-gray-900 py-4">
+  <footer class="relative z-10 py-4">
     <div class="container mx-auto text-center">
       <router-link to="/contact" class="text-base font-medium text-white hover:text-primary">
         Contact Us
