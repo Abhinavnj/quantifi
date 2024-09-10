@@ -95,7 +95,7 @@ def ticker_news(ticker: str):
     article_summary['published_datetime'] = datetime.strptime(article["published_utc"], "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M")
     
     for insight in article["insights"]:
-      if insight["ticker"] == ticker:
+      if insight["ticker"].lower() == ticker.lower():
         article_summary['sentiment'] = insight["sentiment"]
         article_summary['sentiment_reasoning'] = insight["sentiment_reasoning"]
         break
