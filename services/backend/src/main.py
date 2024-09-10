@@ -60,7 +60,7 @@ def ticker_details(ticker: str):
         del cache[ticker]["details"]
 
   # Make API call if not in cache or cache expired
-  url = f"https://api.polygon.io/v3/reference/tickers/{ticker}?apiKey={polygon_api_key}"
+  url = f"https://api.polygon.io/v3/reference/tickers/{ticker.upper()}?apiKey={polygon_api_key}"
   response = requests.get(url)
   if response.status_code != 200:
     raise HTTPException(status_code=response.status_code, detail="Error fetching data")
@@ -80,7 +80,7 @@ def ticker_details(ticker: str):
 def ticker_news(ticker: str):
   if not ticker:
     raise HTTPException(status_code=400, detail="Ticker symbol is required")
-  url = f"https://api.polygon.io/v2/reference/news?ticker={ticker}&limit=10&apiKey={polygon_api_key}"
+  url = f"https://api.polygon.io/v2/reference/news?ticker={ticker.upper()}&limit=10&apiKey={polygon_api_key}"
   response = requests.get(url)
   if response.status_code != 200:
     raise HTTPException(status_code=response.status_code, detail="Error fetching data")
@@ -120,7 +120,7 @@ def ticker_financials(ticker: str):
     #             del cache[ticker]["financials"]
 
     # Make API call if not in cache or cache expired
-    url = f"https://api.polygon.io/vX/reference/financials?ticker={ticker}&limit=10&apiKey={polygon_api_key}"
+    url = f"https://api.polygon.io/vX/reference/financials?ticker={ticker.upper()}&limit=10&apiKey={polygon_api_key}"
     response = requests.get(url)
     if response.status_code != 200:
       raise HTTPException(status_code=response.status_code, detail="Error fetching data")
