@@ -4,6 +4,8 @@ import Analysis from '../views/Analysis.vue';
 import Contact from '../views/Contact.vue';
 import AnalysisHome from '../views/AnalysisHome.vue';
 import LearnHome from '../views/LearnHome.vue';
+import PersonalFinance from '../views/PersonalFinance.vue';
+import About from '../views/About.vue';
 
 const routes = [
   {
@@ -35,7 +37,12 @@ const routes = [
   {
     path: '/personalfinance',
     name: 'PersonalFinance',
-    component: LearnHome,
+    component: PersonalFinance,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
   },
 ];
 

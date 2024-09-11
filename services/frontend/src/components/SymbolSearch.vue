@@ -1,29 +1,36 @@
 <template>
   <div class="relative w-full max-w-md flex items-center">
     <!-- Search Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 h-5 w-5 text-gray-400 opacity-70" fill="none"
+    <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 h-6 w-6 text-gray-500" fill="none"
       viewBox="0 0 16 16" stroke="currentColor">
       <path fill-rule="evenodd"
         d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
         clip-rule="evenodd" />
     </svg>
+
     <!-- Search Input -->
     <input type="text" placeholder="Enter a symbol (ex. AAPL, IBM, VOO)"
-      class="input input-bordered w-full pl-10 pr-20 text-gray-300 bg-gray-800 rounded-lg" ref="searchInput"
-      @input="fetchSymbols" @keydown.down.prevent="handleArrowDown" @keydown.up.prevent="handleArrowUp"
-      @keydown.enter.prevent="handleEnter" v-model="query" />
+      class="input input-primary w-full pl-12 pr-20 text-white bg-gray-900 rounded-full transition-all focus:outline-none focus:ring focus:ring-secondary"
+      ref="searchInput" @input="fetchSymbols" @keydown.down.prevent="handleArrowDown"
+      @keydown.up.prevent="handleArrowUp" @keydown.enter.prevent="handleEnter" v-model="query" />
+
     <!-- Command + K Shortcut -->
-    <div class="absolute right-3 flex items-center space-x-1 text-gray-500">
+    <div class="absolute right-3 flex items-center space-x-1 text-gray-400">
       <kbd class="px-2 py-1 bg-gray-700 rounded text-xs">⌘</kbd>
       <kbd class="px-2 py-1 bg-gray-700 rounded text-xs">K</kbd>
     </div>
+
     <!-- Dropdown List -->
     <ul v-if="symbols.length && query"
-      class="absolute top-full mt-2 w-full bg-gray-800 border border-gray-600 rounded-lg z-10 shadow-lg">
+      class="absolute top-full mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-20 transition-all">
       <li v-for="(symbol, index) in limitedSymbols" :key="index" @click="selectSymbol(symbol)"
-        :class="['px-4 py-2 cursor-pointer flex items-center space-x-2', activeIndex === index ? 'bg-neutral text-white' : 'text-gray-300']">
-        <span class="font-medium">{{ symbol.ticker }}</span>
-        <span class="text-sm text-gray-400">- {{ symbol.name }}</span>
+        :class="['px-4 py-2 cursor-pointer flex items-center justify-between', activeIndex === index ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-700']">
+        <div>
+          <span class="font-medium">{{ symbol.ticker }}</span>
+          <span class="text-sm text-gray-400"> - {{ symbol.name }}</span>
+        </div>
+        <span v-if="activeIndex === index" class="text-xs text-gray-400">↩</span>
+        <!-- Show an arrow when the item is focused -->
       </li>
     </ul>
   </div>
@@ -58,9 +65,7 @@ const fetchSymbols = async () => {
     return;
   }
 
-  // const url = `http://localhost:5001/api/symbol_search?keywords=${query.value}`;
-  // const url = `http://3.22.166.72:5001/api/symbol_search?keywords=${query.value}`;
-  const url = `https://quantifiapp.com/api/symbol_search?keywords=${query.value}`;
+  const url = `http://localhost:5001/api/symbol_search?keywords=${query.value}`;
 
   try {
     const response = await axios.get(url);
@@ -117,5 +122,5 @@ interface SymbolObject {
 </script>
 
 <style scoped>
-/* Scoped styles for the component */
+/* Sleek dropdown styles and transitions */
 </style>

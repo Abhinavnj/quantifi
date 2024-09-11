@@ -124,8 +124,12 @@ def ticker_financials(ticker: str):
     response = requests.get(url)
     if response.status_code != 200:
       raise HTTPException(status_code=response.status_code, detail="Error fetching data")
-
-    return response.json()["results"][0]
+    
+    result = response.json()["results"]
+    if len(result) > 0:
+      return result[0]
+    
+    return None
 
     # Store financials in the cache with a timestamp
     # with cache_lock:
@@ -165,6 +169,13 @@ def ticker_analysis(ticker: str):
       snapshot = ticker_snapshot(ticker)
       details = ticker_details(ticker)
       financials = ticker_financials(ticker)
+      if financials:
+        financials = {
+          'basic_earnings_per_share': financials["financials"]["income_statement"]["basic_earnings_per_share"]["value"]
+        }
+      else:
+        financials = {}
+        
       news = ticker_news(ticker)
 
       # Fetch logo and encode it as base64
@@ -188,9 +199,7 @@ def ticker_analysis(ticker: str):
           'last_minute_price': snapshot["ticker"]["min"]["o"],
           'logo_base64': f"data:image/png;base64,{logo_base64}" if logo_base64 else None
         },
-        'financials': {
-          'basic_earnings_per_share': financials["financials"]["income_statement"]["basic_earnings_per_share"]["value"]
-        },
+        'financials': financials,
         'news': news
       }
 

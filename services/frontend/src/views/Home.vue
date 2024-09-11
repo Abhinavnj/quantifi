@@ -3,11 +3,27 @@
     <Navbar />
 
     <!-- Main Content -->
-    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left py-10 px-10">
-      <h1 class="text-5xl font-bold text-white">Welcome to Quantifi.</h1>
+    <main class="flex flex-col justify-center items-center text-center flex-grow p-6 space-y-6">
+      <!-- Heading -->
+      <h1 class="text-6xl font-bold text-white">
+        Welcome to Quantifi
+      </h1>
+
+      <!-- Tagline -->
+      <p class="text-xl text-gray-300 max-w-xl">
+        Simplifying investment knowledge and financial analysis.
+      </p>
+
+      <!-- Call-to-Action Buttons (Router Links) -->
+      <div class="space-x-4">
+        <!-- Learn More button routes to /about -->
+        <router-link to="/about" class="btn btn-primary">Learn More</router-link>
+
+        <!-- Get Started button routes to /analysis -->
+        <router-link to="/analysis" class="btn btn-outline btn-accent">Get Started</router-link>
+      </div>
     </main>
 
-    <!-- Footer -->
     <Footer />
   </div>
 </template>
