@@ -97,8 +97,8 @@ const news = ref([]); // Store news articles
 // Function to fetch ticker data from the API
 const fetchTickerData = async () => {
   try {
-    const response = await axios.get(`http://localhost:5001/api/analysis/ticker?ticker=${symbol.value}`);
-    // const response = await axios.get(`https://quantifiapp.com/api/analysis/ticker?ticker=${symbol.value}`);
+    // const response = await axios.get(`http://localhost:5001/api/analysis/ticker?ticker=${symbol.value}`);
+    const response = await axios.get(`https://quantifiapp.com/api/analysis/ticker?ticker=${symbol.value}`);
     console.log(response);
     tickerPrevClose.value = response.data.overview.close;
     tickerPrevOpen.value = response.data.overview.open;
