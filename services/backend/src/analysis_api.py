@@ -135,3 +135,11 @@ def ticker_analysis(ticker: str):
   except Exception as e:
     print("Error during analysis:", e)
     raise HTTPException(status_code=500, detail="Server error")
+  
+@router.get("/api/symbol_search")
+def symbol_search(keywords: str):
+  url = f"https://api.polygon.io/v3/reference/tickers?search={keywords}&active=true&limit=10&apiKey={polygon_api_key}"
+  response = requests.get(url)
+  if response.status_code != 200:
+    raise HTTPException(status_code=response.status_code, detail="Error fetching data")
+  return response.json()
