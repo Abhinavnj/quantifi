@@ -83,7 +83,7 @@ def ticker_financials(ticker: str):
   
   return None
 
-@router.get("/api/analysis/ticker")
+@router.get("/api/analysis")
 def ticker_analysis(ticker: str):
   if not ticker:
     raise HTTPException(status_code=400, detail="Ticker symbol is required")
