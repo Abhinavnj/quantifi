@@ -3,7 +3,7 @@
     <Navbar />
 
     <!-- Main Content -->
-    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left p-10">
+    <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left px-10 xl:px-10">
       <!-- Company logo and name in the top left -->
       <div class="flex items-center space-x-4 mb-6">
         <!-- Bind src to the tickerLogo variable and make it circular -->
@@ -22,16 +22,23 @@
       </div>
 
       <!-- Overview Tab Content -->
-      <div v-if="activeTab === 'overview'">
-        <!-- Display all the 'overview' data -->
-        <div class="grid grid-cols-2 gap-6">
-          <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
-          <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
-          <StatDisplay v-if="tickerHigh" title="High" :value="tickerHigh" />
-          <StatDisplay v-if="tickerLow" title="Low" :value="tickerLow" />
-          <StatDisplay v-if="todaysChange" title="Today's Change" :value="todaysChange" />
-          <StatDisplay v-if="todaysChangePercentage" title="Change %" :value="todaysChangePercentage" />
-          <StatDisplay v-if="lastMinutePrice" title="Last Minute Price" :value="lastMinutePrice" />
+      <div v-if="activeTab === 'overview'" class="w-full">
+        <div class="flex flex-wrap justify-between w-full">
+          <!-- Stats display grid -->
+          <div class="grid grid-cols-3 gap-6 flex-grow">
+            <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
+            <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
+            <StatDisplay v-if="tickerHigh" title="High" :value="tickerHigh" />
+            <StatDisplay v-if="tickerLow" title="Low" :value="tickerLow" />
+            <StatDisplay v-if="todaysChange" title="Today's Change" :value="todaysChange" />
+            <StatDisplay v-if="todaysChangePercentage" title="Change %" :value="todaysChangePercentage" />
+            <StatDisplay v-if="lastMinutePrice" title="Last Minute Price" :value="lastMinutePrice" />
+          </div>
+
+          <!-- Chart Component -->
+          <div class="flex-grow ml-10 w-full xl:w-8/12">
+            <Chart :aggregateData="aggregateData" />
+          </div>
         </div>
       </div>
 
@@ -45,7 +52,6 @@
       <!-- News Tab Content -->
       <div v-if="activeTab === 'news'">
         <div v-for="article in news" :key="article.title" class="p-4 mb-4 rounded-lg bg-base-300">
-          <!-- News Item -->
           <div class="flex items-center space-x-4 mb-4">
             <img :src="article.publisher_logo" alt="Publisher Logo" class="h-10 w-10 object-contain" />
             <div>
@@ -60,10 +66,6 @@
         </div>
       </div>
 
-      <!-- <p class="text-lg text-gray-300 mt-8">
-        Selected symbol: {{ symbol }}
-      </p> -->
-
     </main>
 
     <Footer />
@@ -71,12 +73,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import axios from "axios";
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
-import StatDisplay from "../components/StatDisplay.vue";
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
+import StatDisplay from '../components/StatDisplay.vue';
+import Chart from '../components/Chart.vue';  // Import the Chart component
 
 // Use route to get the symbol parameter
 const route = useRoute();
@@ -93,13 +96,14 @@ const tickerLogo = ref("");
 const basicEarningsPerShare = ref("");
 const activeTab = ref('overview'); // Track which tab is active
 const news = ref([]); // Store news articles
+const aggregateData = ref([]); // Store aggregate data for chart
 
 // Function to fetch ticker data from the API
 const fetchTickerData = async () => {
   try {
-    // const response = await axios.get(`http://localhost:5001/api/analysis/ticker?ticker=${symbol.value}`);
     const response = await axios.get(`https://quantifiapp.com/api/analysis/ticker?ticker=${symbol.value}`);
-    console.log(response);
+    // const response = await axios.get(`http://localhost:5001/api/analysis/ticker?ticker=${symbol.value}`);
+    console.log(response)
     tickerPrevClose.value = response.data.overview.close;
     tickerPrevOpen.value = response.data.overview.open;
     tickerHigh.value = response.data.overview.high;
@@ -111,6 +115,7 @@ const fetchTickerData = async () => {
     symbolName.value = response.data.overview.name;
     basicEarningsPerShare.value = response.data.financials.basic_earnings_per_share;
     news.value = response.data.news; // Store news articles
+    aggregateData.value = response.data.aggregate_data; // Store aggregate data for chart
   } catch (error) {
     console.error("Error fetching ticker data:", error);
     tickerPrevClose.value = "N/A";
@@ -134,8 +139,6 @@ const getSentimentColor = (sentiment) => {
 <style scoped>
 img {
   border-radius: 50%;
-  /* Circular view */
   border: 2px solid white;
-  /* Optional: add a border around the logo */
 }
 </style>

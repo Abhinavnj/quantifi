@@ -6,6 +6,7 @@ import AnalysisHome from '../views/AnalysisHome.vue';
 import LearnHome from '../views/LearnHome.vue';
 import PersonalFinance from '../views/PersonalFinance.vue';
 import About from '../views/About.vue';
+import Blog from '../views/Blog.vue';
 
 const routes = [
   {
@@ -44,6 +45,12 @@ const routes = [
     name: 'About',
     component: About,
   },
+  {
+    path: '/blog/:title',
+    name: 'Blog',
+    component: Blog,
+    props: true
+  }
 ];
 
 const router = createRouter({
