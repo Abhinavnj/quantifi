@@ -85,56 +85,86 @@ def ticker_financials(ticker: str):
 
 @router.get("/api/analysis")
 def ticker_analysis(ticker: str):
-  if not ticker:
-    raise HTTPException(status_code=400, detail="Ticker symbol is required")
+    if not ticker:
+        raise HTTPException(status_code=400, detail="Ticker symbol is required")
 
-  try:
-    snapshot = ticker_snapshot(ticker)
-    details = ticker_details(ticker)
-    financials = ticker_financials(ticker)
-    if financials:
-      financials = {
-        'basic_earnings_per_share': financials["financials"]["income_statement"]["basic_earnings_per_share"]["value"]
-      }
-    else:
-      financials = {}
-      
-    news = ticker_news(ticker)
-
-    # Fetch logo and encode it as base64
-    logo_url = details["branding"]["icon_url"] + '?' + "apiKey=" + polygon_api_key
-    logo_response = requests.get(logo_url)
-
-    if logo_response.status_code == 200:
-        logo_base64 = base64.b64encode(logo_response.content).decode('utf-8')
-    else:
-        logo_base64 = None
+    try:
+        snapshot = ticker_snapshot(ticker)
+        details = ticker_details(ticker)
+        financials = ticker_financials(ticker)
         
-    # Fetch aggregate data for the past 5 years
-    aggregate_data = fetch_aggregate_data(ticker)
+        if financials:
+            financials = {
+                'basic_earnings_per_share': financials["financials"]["income_statement"]["basic_earnings_per_share"]["value"]
+            }
+        else:
+            financials = {}
 
-    data = {
-      'overview': {
-        'name': details.get("name", "Name not found"),
-        'close': snapshot["ticker"]["day"]["c"],
-        'open': snapshot["ticker"]["day"]["o"],
-        'high': snapshot["ticker"]["day"]["h"],
-        'low': snapshot["ticker"]["day"]["l"],
-        'todays_change': f"{snapshot['ticker']['todaysChange']:+.2f}",
-        'todays_change_percentage': f"{snapshot['ticker']['todaysChangePerc']:+.2f}%",
-        'last_minute_price': snapshot["ticker"]["min"]["o"],
-        'logo_base64': f"data:image/png;base64,{logo_base64}" if logo_base64 else None
-      },
-      'financials': financials,
-      'news': news,
-      'aggregate_data': aggregate_data
-    }
+        news = ticker_news(ticker)
 
-    return data
+        # Fetch logo and encode it as base64
+        logo_url = details["branding"]["icon_url"] + '?' + "apiKey=" + polygon_api_key
+        logo_response = requests.get(logo_url)
 
-  except Exception as e:
-    print("Error during analysis:", e)
-    raise HTTPException(status_code=500, detail="Server error")
+        if logo_response.status_code == 200:
+            logo_base64 = base64.b64encode(logo_response.content).decode('utf-8')
+        else:
+            logo_base64 = None
+
+        # Fetch aggregate data for the past 5 years
+        aggregate_data = fetch_aggregate_data(ticker)
+
+        # Adding 'info' alongside 'value' in overview section
+        data = {
+            'overview': {
+                'name': {
+                    'value': details.get("name", "Name not found"),
+                    'info': "Company's official name"
+                },
+                'close': {
+                    'value': snapshot["ticker"]["day"]["c"],
+                    'info': "Price at which the stock closed today"
+                },
+                'open': {
+                    'value': snapshot["ticker"]["day"]["o"],
+                    'info': "Price at which the stock opened today"
+                },
+                'high': {
+                    'value': snapshot["ticker"]["day"]["h"],
+                    'info': "Highest price of the stock during the day"
+                },
+                'low': {
+                    'value': snapshot["ticker"]["day"]["l"],
+                    'info': "Lowest price of the stock during the day"
+                },
+                'todays_change': {
+                    'value': f"{snapshot['ticker']['todaysChange']:+.2f}",
+                    'info': "Difference between today's close and yesterday's close"
+                },
+                'todays_change_percentage': {
+                    'value': f"{snapshot['ticker']['todaysChangePerc']:+.2f}%",
+                    'info': "Percentage change in stock price from yesterday to today"
+                },
+                'last_minute_price': {
+                    'value': snapshot["ticker"]["min"]["o"],
+                    'info': "Stock price at the last minute of trading"
+                },
+                'logo_base64': {
+                    'value': f"data:image/png;base64,{logo_base64}" if logo_base64 else None,
+                    'info': "Company logo"
+                }
+            },
+            'financials': financials,
+            'news': news,
+            'aggregate_data': aggregate_data
+        }
+
+        return data
+
+    except Exception as e:
+        print("Error during analysis:", e)
+        raise HTTPException(status_code=500, detail="Server error")
+
   
 @router.get("/api/symbol_search")
 def symbol_search(keywords: str):
