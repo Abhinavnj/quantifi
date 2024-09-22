@@ -102,6 +102,7 @@ const aggregateData = ref([]); // Store aggregate data for chart
 const fetchTickerData = async () => {
   try {
     const response = await axios.get(`https://quantifiapp.com/api/analysis?ticker=${symbol.value}`);
+    // const response = await axios.get(`http://localhost:5001/api/analysis?ticker=${symbol.value}`);
     tickerPrevClose.value = response.data.overview.close;
     tickerPrevOpen.value = response.data.overview.open;
     tickerHigh.value = response.data.overview.high;

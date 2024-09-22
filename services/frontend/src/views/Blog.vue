@@ -47,8 +47,8 @@ const loading = ref(true);
 // Fetch the blog data based on the query parameter
 const fetchBlog = async (id) => {
   try {
-    // const response = await axios.get(`https://quantifiapp.com/api/blogs/${id}`);
-    const response = await axios.get(`http://localhost:5001/api/blogs/${id}`);
+    const response = await axios.get(`https://quantifiapp.com/api/blogs/${id}`);
+    // const response = await axios.get(`http://localhost:5001/api/blogs/${id}`);
     blog.value = response.data;
   } catch (err) {
     error.value = 'Error fetching blog post.';
