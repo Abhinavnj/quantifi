@@ -1,13 +1,6 @@
 <template>
   <div class="relative flex flex-col min-h-screen text-white">
-    <!-- Background Animation -->
-    <div class="absolute inset-0 z-0 flex items-center justify-center">
-      <div
-        class="w-96 h-96 bg-gradient-to-br from-purple-700 to-blue-800 rounded-full blur-3xl opacity-20 animate-slow-pulse">
-      </div>
-    </div>
-
-    <Navbar />
+    <Navbar class="z-50" />
 
     <!-- Main Content -->
     <main class="relative z-10 flex-grow flex flex-col justify-center items-center text-center py-20 px-4">
@@ -72,23 +65,4 @@ function handleSubmit() {
 }
 </script>
 
-<style scoped>
-/* Background animation with a slower pulse */
-@keyframes slow-pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-
-  50% {
-    transform: scale(1.1);
-    opacity: 0.2;
-  }
-}
-
-.animate-slow-pulse {
-  animation: slow-pulse 6s ease-in-out infinite;
-}
-</style>
+<style scoped></style>

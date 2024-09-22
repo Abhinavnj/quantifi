@@ -1,6 +1,6 @@
 <template>
   <div data-theme="custom-dark" class="relative flex flex-col min-h-screen">
-    <Navbar />
+    <Navbar class="z-50" />
 
     <!-- Main Content -->
     <main class="relative z-10 flex-grow flex flex-col justify-center items-center text-center p-10 space-y-12">
@@ -17,58 +17,18 @@
       <section class="flex flex-col items-center space-y-8 max-w-4xl">
         <!-- Recent Blog Posts Section -->
         <h2 class="text-3xl font-semibold text-white">Featured Articles</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          <!-- Example of a Blog Post Card -->
-          <div class="card bg-neutral shadow-lg">
-            <div class="card-body">
-              <h3 class="card-title text-white text-2xl">5 Simple Steps to Start Budgeting</h3>
-              <p class="text-gray-400">Learn how to create a realistic budget that works for your financial goals.</p>
-              <div class="card-actions justify-end">
-                <!-- <button class="btn btn-outline btn-primary">Read More</button> -->
-                <router-link :to="{
-                  name: 'Blog',
-                  params: {
-                    title: '5 Simple Steps to Start Budgeting',
-                    description: 'Learn how to create a realistic budget that works for your financial goals...',
-                    date: '2024-09-12',
-                    progress: 50
-                  }
-                }" class="btn btn-primary">
-                  Read More
-                </router-link>
-              </div>
-            </div>
-          </div>
 
-          <div class="card bg-neutral shadow-lg">
-            <div class="card-body">
-              <h3 class="card-title text-white text-2xl">Investing 101: A Beginner's Guide</h3>
-              <p class="text-gray-400">Discover the basics of investing and how to grow your wealth over time.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-outline btn-primary">Read More</button>
-              </div>
-            </div>
-          </div>
+        <div v-if="loading" class="text-center text-white">
+          Loading blogs...
+        </div>
 
-          <div class="card bg-neutral shadow-lg">
-            <div class="card-body">
-              <h3 class="card-title text-white text-2xl">Maximizing Your Savings Potential</h3>
-              <p class="text-gray-400">Tips and tricks to help you save more effectively for the future.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-outline btn-primary">Read More</button>
-              </div>
-            </div>
-          </div>
+        <div v-if="error" class="text-center text-red-500">
+          {{ error }}
+        </div>
 
-          <div class="card bg-neutral shadow-lg">
-            <div class="card-body">
-              <h3 class="card-title text-white text-2xl">Understanding Credit Scores</h3>
-              <p class="text-gray-400">A deep dive into how credit scores work and how you can improve yours.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-outline btn-primary">Read More</button>
-              </div>
-            </div>
-          </div>
+        <div v-if="blogs.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          <!-- Loop through each blog and pass to BlogCard component -->
+          <BlogCard v-for="blog in blogs" :key="blog.itemId" :blog="blog" />
         </div>
       </section>
 
@@ -86,8 +46,34 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import BlogCard from '../components/BlogCard.vue'; // Import BlogCard component
+
+// State variables for blogs, loading, and error handling
+const blogs = ref([]);
+const loading = ref(true);
+const error = ref(null);
+
+// Function to fetch blogs from the API
+const fetchBlogs = async () => {
+  try {
+    const response = await axios.get('https://quantifiapp.com/api/blogs');
+    blogs.value = response.data;
+  } catch (err) {
+    error.value = 'Error fetching blogs.';
+  } finally {
+    loading.value = false;
+  }
+  console.log(blogs)
+};
+
+// Fetch blogs when the component is mounted
+onMounted(() => {
+  fetchBlogs();
+});
 </script>
 
 <style scoped>

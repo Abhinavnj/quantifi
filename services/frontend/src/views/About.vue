@@ -1,6 +1,6 @@
 <template>
   <div data-theme="custom-dark" class="relative flex flex-col min-h-screen">
-    <Navbar />
+    <Navbar class="z-50" />
 
     <!-- Main Content -->
     <main class="relative z-10 flex-grow flex flex-col justify-center items-center text-center p-10 space-y-6">

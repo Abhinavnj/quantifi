@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex flex-col min-h-screen overflow-hidden">
-    <Navbar />
+    <Navbar class="z-50" />
 
     <!-- Main Content -->
     <main class="relative z-10 flex-grow flex flex-col justify-start items-start text-left px-10 xl:px-10">
@@ -23,9 +23,9 @@
 
       <!-- Overview Tab Content -->
       <div v-if="activeTab === 'overview'" class="w-full">
-        <div class="flex flex-wrap justify-between w-full">
+        <div class="flex flex-wrap w-full gap-6">
           <!-- Stats display grid -->
-          <div class="grid grid-cols-3 gap-6 flex-grow">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             <StatDisplay v-if="tickerPrevOpen" title="Previous Open" :value="tickerPrevOpen" />
             <StatDisplay v-if="tickerPrevClose" title="Previous Close" :value="tickerPrevClose" />
             <StatDisplay v-if="tickerHigh" title="High" :value="tickerHigh" />
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Chart Component -->
-          <div class="flex-grow ml-10 w-full xl:w-8/12">
+          <div class="w-full xl:w-8/12 mt-10">
             <Chart :aggregateData="aggregateData" />
           </div>
         </div>
@@ -44,7 +44,7 @@
 
       <!-- Financials Tab Content -->
       <div v-if="activeTab === 'financials'">
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <StatDisplay v-if="basicEarningsPerShare" title="Earnings Per Share" :value="basicEarningsPerShare" />
         </div>
       </div>
@@ -102,8 +102,6 @@ const aggregateData = ref([]); // Store aggregate data for chart
 const fetchTickerData = async () => {
   try {
     const response = await axios.get(`https://quantifiapp.com/api/analysis?ticker=${symbol.value}`);
-    // const response = await axios.get(`http://localhost:5001/api/analysis?ticker=${symbol.value}`);
-    console.log(response)
     tickerPrevClose.value = response.data.overview.close;
     tickerPrevOpen.value = response.data.overview.open;
     tickerHigh.value = response.data.overview.high;

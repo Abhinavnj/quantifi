@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router';
 import Home from '../views/Home.vue';
 import Analysis from '../views/Analysis.vue';
 import Contact from '../views/Contact.vue';
@@ -46,10 +46,11 @@ const routes = [
     component: About,
   },
   {
-    path: '/blog/:title',
+    // Modify the blog route to use a query parameter
+    path: '/blog',
     name: 'Blog',
     component: Blog,
-    props: true
+    props: (route: RouteLocationNormalized) => ({ id: route.query.id })  // Extract the id query parameter
   }
 ];
 

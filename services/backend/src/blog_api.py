@@ -26,7 +26,7 @@ async def get_all_blogs():
 @router.get("/api/blogs/{blog_id}")
 async def get_blog(blog_id: str):
   try:
-    response = blogs_table.get_item(Key={'id': blog_id})
+    response = blogs_table.get_item(Key={'itemId': blog_id})
     blog = response.get('Item')
     if not blog:
       raise HTTPException(status_code=404, detail="Blog not found")
@@ -45,7 +45,7 @@ async def add_blog(blog: Blog):
 @router.delete("/api/blogs/{blog_id}")
 async def delete_blog(blog_id: str):
   try:
-    blogs_table.delete_item(Key={'id': blog_id})
+    blogs_table.delete_item(Key={'itemId': blog_id})
     return {"message": "Blog deleted successfully!"}
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
