@@ -1,53 +1,31 @@
 <template>
-  <div>
-    <!-- Timeframe selection -->
-    <div class="mb-4">
-      <label class="mr-2">Select Timeframe:</label>
-      <select class="select select-bordered" v-model="selectedTimeframe">
-        <option value="1M">1M</option>
-        <option value="3M">3M</option>
-        <option value="6M">6M</option>
-        <option value="1Y">1Y</option>
-        <option value="2Y">2Y</option>
-        <option value="5Y">5Y</option>
-      </select>
+  <div class="p-4 bg-black rounded-lg shadow-md">
+    <div class="flex justify-end mb-4">
+      <div class="btn-group">
+        <button v-for="timeframe in timeframes" :key="timeframe" @click="selectedTimeframe = timeframe"
+          :class="['btn', selectedTimeframe === timeframe ? 'btn-active' : '']">
+          {{ timeframe }}
+        </button>
+      </div>
     </div>
-
-    <!-- Chart -->
-    <line-chart :chart-data="chartData" :options="chartOptions"></line-chart>
+    <div class="h-96 w-full">
+      <LineChart :chart-data="chartData" :options="chartOptions" />
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent } from 'vue';
 import { Line } from 'vue-chartjs';
 import {
   Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  PointElement,
-  CategoryScale,
-  LinearScale,
-  TimeScale,
+  Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale, Filler,
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import { format } from 'date-fns';
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  PointElement,
-  CategoryScale,
-  LinearScale,
-  TimeScale,
-);
+ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale, Filler);
 
 export default defineComponent({
-  name: 'Chart',
+  name: 'StockChart',
   components: {
     LineChart: Line,
   },
@@ -57,136 +35,143 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
-    const selectedTimeframe = ref('6M');
-
-    const filteredData = computed(() => {
-      // Filter data based on selectedTimeframe
-      const timeframes = {
-        '1M': 30,
-        '3M': 90,
-        '6M': 180,
-        '1Y': 365,
-        '2Y': 730,
-        '5Y': 1825,
-      };
-      const days = timeframes[selectedTimeframe.value];
-      const cutoffTime = Date.now() - days * 24 * 60 * 60 * 1000;
-      return props.aggregateData
-        .filter((dataPoint) => dataPoint.t >= cutoffTime)
-        .sort((a, b) => a.t - b.t);
-    });
-
-    const chartData = computed(() => {
-      return {
-        labels: filteredData.value.map((dataPoint) => new Date(dataPoint.t)), // Convert epoch to Date
-        datasets: [
-          {
-            label: 'Closing Price',
-            data: filteredData.value.map((dataPoint) => dataPoint.c),
-            borderColor: '#c9882e', // Gold color for line
-            backgroundColor: 'rgba(201, 136, 46, 0.2)', // Light gold fill
-            fill: true, // Filled chart like the image
-            pointBackgroundColor: '#c9882e', // Gold hover dot
-            pointRadius: 3, // Set the radius for hover dots
-            pointHoverRadius: 6, // Larger radius when hovering
-            pointHoverBorderColor: '#fff', // White border on hover
-            pointHoverBorderWidth: 2, // Border thickness on hover
-            tension: 0.4, // Smooth curve for line
-          },
-        ],
-      };
-    });
-
-    const chartOptions = computed(() => {
-      let timeUnit = 'month';
-      if (selectedTimeframe.value === '1M' || selectedTimeframe.value === '3M') {
-        timeUnit = 'day';
-      } else if (selectedTimeframe.value === '6M' || selectedTimeframe.value === '1Y') {
-        timeUnit = 'month';
-      } else {
-        timeUnit = 'year';
-      }
-
-      return {
+  data() {
+    return {
+      timeframes: ['5D', '1M', '3M', '6M', 'YTD', '1Y', '5Y'],
+      selectedTimeframe: '1Y',
+      chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
         interaction: {
-          mode: 'nearest',
+          mode: 'index',
           intersect: false,
         },
         plugins: {
           tooltip: {
+            enabled: true,
             mode: 'index',
             intersect: false,
-            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Dark tooltip background
-            titleColor: '#fff', // White tooltip title
-            bodyColor: '#fff', // White tooltip body
             callbacks: {
-              label: function (tooltipItem) {
-                return `$${tooltipItem.formattedValue} USD`;
-              },
-              title: function (tooltipItems) {
-                return format(new Date(tooltipItems[0].label), 'MMM dd, yyyy'); // Human-readable date
+              label: function (context) {
+                let label = context.dataset.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                  label += '$' + context.parsed.y.toFixed(2);
+                }
+                return label;
               },
             },
+          },
+          legend: {
+            display: false,
           },
         },
         scales: {
           x: {
-            type: 'time',
-            time: {
-              unit: timeUnit, // Ensure this is still dynamic based on the timeframe
-              displayFormats: {
-                day: 'MMM dd, yyyy',  // Ensure this displays only month, day, and year
-                month: 'MMM yyyy',
-                year: 'yyyy',
-              },
+            display: true,
+            title: {
+              display: false,
             },
             ticks: {
-              color: '#aaa', // Lighter ticks
               autoSkip: true,
-              maxRotation: 0,
-              callback: function (value) {
-                return format(new Date(value), 'MMM dd, yyyy'); // Ensure this returns only the date
-              },
+              maxTicksLimit: 10,
+              color: '#FFFFFF', // White color for x-axis labels
+            },
+            grid: {
+              display: false,
             },
           },
           y: {
-            grid: {
-              color: 'rgba(255, 255, 255, 0.1)', // Light grid lines
+            display: true,
+            title: {
+              display: false,
             },
             ticks: {
-              color: '#aaa', // Lighter ticks
+              callback: function (value) {
+                return '$' + value;
+              },
+              color: '#FFFFFF', // White color for y-axis labels
             },
-            title: {
-              display: true,
-              text: 'Closing Price (USD)',
-              color: '#fff',
+            grid: {
+              display: false,
             },
           },
         },
-        elements: {
-          point: {
-            radius: 0, // Hide points unless hovered
-          },
-        },
-      };
-    });
-
-    return {
-      selectedTimeframe,
-      chartData,
-      chartOptions,
-    };
+      },
+    }
   },
-});
+  computed: {
+    filteredData() {
+      const data = this.aggregateData.slice().sort((a, b) => a.t - b.t);
+      const endDate = new Date(data[data.length - 1].t);
+      let startDate;
+
+      switch (this.selectedTimeframe) {
+        case '5D':
+          startDate = new Date(endDate);
+          startDate.setDate(endDate.getDate() - 5);
+          break;
+        case '1M':
+          startDate = new Date(endDate);
+          startDate.setMonth(endDate.getMonth() - 1);
+          break;
+        case '3M':
+          startDate = new Date(endDate);
+          startDate.setMonth(endDate.getMonth() - 3);
+          break;
+        case '6M':
+          startDate = new Date(endDate);
+          startDate.setMonth(endDate.getMonth() - 6);
+          break;
+        case 'YTD':
+          startDate = new Date(endDate.getFullYear(), 0, 1);
+          break;
+        case '1Y':
+          startDate = new Date(endDate);
+          startDate.setFullYear(endDate.getFullYear() - 1);
+          break;
+        case '5Y':
+          startDate = new Date(endDate);
+          startDate.setFullYear(endDate.getFullYear() - 5);
+          break;
+        default:
+          startDate = new Date(data[0].t);
+      }
+
+      const startTime = startDate.getTime();
+      const endTime = endDate.getTime();
+
+      return data.filter(point => point.t >= startTime && point.t <= endTime);
+    },
+    chartData() {
+      return {
+        labels: this.filteredData.map(point => this.formatDate(point.t)),
+        datasets: [{
+          label: 'Stock Price',
+          data: this.filteredData.map(point => point.c),
+          borderColor: '#cd913e', // Line color
+          backgroundColor: 'rgba(205, 145, 62, 0.2)', // Semi-transparent fill color
+          tension: 0, // Straight lines between points
+          fill: true,
+        }]
+      }
+    },
+  },
+  methods: {
+    formatDate(timestamp) {
+      const date = new Date(timestamp);
+      const options = { month: 'short', day: 'numeric', year: 'numeric' };
+      return date.toLocaleDateString(undefined, options);
+    },
+  },
+})
 </script>
 
 <style scoped>
-/* Dark background for the chart area */
-div {
-  background-color: #1c1c1e;
-  padding: 16px;
-  border-radius: 8px;
+/* Adjust the height to make the chart larger */
+.h-96 {
+  height: 24rem;
 }
 </style>

@@ -45,7 +45,7 @@
             </div>
 
             <!-- Chart Component -->
-            <div class="w-full xl:w-8/12 mt-10">
+            <div>
               <Chart :aggregateData="aggregateData" />
             </div>
           </div>
@@ -106,8 +106,8 @@ const isLoading = ref(true); // Loading state
 // Function to fetch ticker data from the API
 const fetchTickerData = async () => {
   try {
-    const response = await axios.get(`https://quantifiapp.com/api/analysis?ticker=${symbol.value}`);
-    // const response = await axios.get(`http://localhost:5001/api/analysis?ticker=${symbol.value}`);
+    // const response = await axios.get(`https://quantifiapp.com/api/analysis?ticker=${symbol.value}`);
+    const response = await axios.get(`http://localhost:5001/api/analysis?ticker=${symbol.value}`);
     overview.value = response.data.overview;
     symbolName.value = overview.value.name.value;
     tickerLogo.value = overview.value.logo_base64.value;
