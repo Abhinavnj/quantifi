@@ -3,3 +3,5 @@ services/frontend/.vscode
 services/backend/.DS_Store
 services/frontend/.DS_Store
 services/backend/src/__pycache__
+services/backend/src/.env
+services/backend/src/test.json
